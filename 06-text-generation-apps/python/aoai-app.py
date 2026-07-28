@@ -9,16 +9,19 @@ load_dotenv()
 
 # configure the OpenAI client against the Azure OpenAI (Microsoft Foundry) v1 endpoint
 client = OpenAI(
-    api_key=os.environ["AZURE_OPENAI_API_KEY"],
-    base_url=f"{os.environ['AZURE_OPENAI_ENDPOINT'].rstrip('/')}/openai/v1/",
+    api_key=os.environ["GITHUB_TOKEN"],
+    base_url="https://models.inference.ai.azure.com",
 )
 
-deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]
+model = "gpt-4.1-mini"
 
 # add your completion code
 prompt = "Complete the following: Once upon a time there was a"
 # make a request using the Responses API
-response = client.responses.create(model=deployment, input=prompt, store=False)
+response = client.responses.create(
+    model=model,
+    input=prompt,
+)
 
 # print response
 print(response.output_text)
