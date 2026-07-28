@@ -12,11 +12,20 @@ client = OpenAI(
 
 model = "gpt-4.1-mini"
 
-prompt = "Complete the following: Once upon a time there was a"
+prompt = "Complete the following story: Once upon a time there was a girl who peacefully lived on a remote space colony but one day"
 
-response = client.responses.create(
+response = client.chat.completions.create(
     model=model,
-    input=prompt,
+    messages=[
+        {
+            "role": "system",
+            "content": "You continue stories exactly where they end. Never rewrite or restart them.",
+        },
+        {
+            "role": "user",
+            "content": "Once upon a time there was a girl who peacefully lived on a remote space colony, but one day",
+        },
+    ],
 )
 
-print(response.output_text)
+print(response.choices[0].message.content)
