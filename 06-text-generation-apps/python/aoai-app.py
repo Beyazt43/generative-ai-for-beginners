@@ -18,8 +18,8 @@ response = client.chat.completions.create(
     model=model,
     messages=[
         {
-            "role": "system",
-            "content": "You continue stories exactly where they end. Never rewrite or restart them.",
+            "role": "system",  # role = who is speaking, system = the AI, user = you
+            "content": "You continue stories exactly where they end. Never rewrite or restart them.",  # content = what they said, system = instructions for the AI, user = your prompt
         },
         {
             "role": "user",
